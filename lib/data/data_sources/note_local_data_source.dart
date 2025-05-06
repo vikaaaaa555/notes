@@ -6,7 +6,7 @@ import '../models/note_model.dart';
 abstract class NoteLocalDataSource {
   Future<List<NoteEntity>> getAllNotes();
 
-  Future<void> addNote(int id, String title, String content, String image);
+  Future<void> addNote(String title, String content, String image);
 
   Future<void> deleteNote(int id);
 
@@ -24,19 +24,9 @@ class NoteLocalDataSourceImpl extends NoteLocalDataSource {
   NoteLocalDataSourceImpl({required this.notesBox});
 
   @override
-  Future<void> addNote(
-    int id,
-    String title,
-    String content,
-    String image,
-  ) async {
-    final note = NoteModel(
-      id: id,
-      title: title,
-      content: content,
-      image: image,
-    );
-    await notesBox.put(id, note);
+  Future<void> addNote(String title, String content, String image) async {
+    final note = NoteModel(title: title, content: content, image: image);
+    await notesBox.add(note);
   }
 
   @override
@@ -57,13 +47,12 @@ class NoteLocalDataSourceImpl extends NoteLocalDataSource {
   ) async {
     final note = notesBox.get(id);
     if (note != null) {
-      final updatedNote = NoteModel(
-        id: note.id,
-        title: title ?? note.title,
-        content: content ?? note.content,
-        image: image ?? note.image,
-      );
-      await notesBox.put(id, updatedNote);
+      if (title != null) note.title = title;
+      if (content != null) note.content = content;
+      if (image != null) note.image = image;
+      await note.save();
+    } else {
+      throw Exception('Note with id $id not found');
     }
   }
 }

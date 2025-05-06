@@ -5,30 +5,22 @@ import '../../domain/entities/note_entity.dart';
 part 'note_model.g.dart';
 
 @HiveType(typeId: 0)
-class NoteModel {
+class NoteModel extends HiveObject {
   @HiveField(0)
-  final int id;
+  String title;
   @HiveField(1)
-  final String title;
+  String content;
   @HiveField(2)
-  final String content;
-  @HiveField(3)
-  final String image;
+  String image;
 
-  const NoteModel({
-    required this.id,
-    required this.title,
-    required this.content,
-    required this.image,
-  });
+  NoteModel({required this.title, required this.content, required this.image});
 
   factory NoteModel.fromEntity(NoteEntity entity) => NoteModel(
-    id: entity.id,
     title: entity.title,
     content: entity.content,
     image: entity.image,
   );
 
   NoteEntity toEntity() =>
-      NoteEntity(id: id, title: title, content: content, image: image);
+      NoteEntity(id: key as int, title: title, content: content, image: image);
 }

@@ -9,15 +9,23 @@ class UpdateNoteUseCase extends UseCaseWithParams<void, UpdateNoteParams> {
   const UpdateNoteUseCase(this._repository);
 
   @override
-  Future<void> call(UpdateNoteParams params) async =>
-      await _repository.deleteNote(params.id);
+  Future<void> call(UpdateNoteParams params) async => await _repository
+      .updateNote(params.id, params.title, params.content, params.image);
 }
 
 class UpdateNoteParams extends Equatable {
   final int id;
+  final String? title;
+  final String? content;
+  final String? image;
 
-  const UpdateNoteParams({required this.id});
+  const UpdateNoteParams({
+    required this.id,
+    required this.title,
+    required this.content,
+    required this.image,
+  });
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, title, content, image];
 }

@@ -19,9 +19,9 @@ abstract class NoteLocalDataSource {
 }
 
 class NoteLocalDataSourceImpl extends NoteLocalDataSource {
-  final Box<NoteModel> _notesBox;
+  final Box<NoteModel> notesBox;
 
-  NoteLocalDataSourceImpl(this._notesBox);
+  NoteLocalDataSourceImpl({required this.notesBox});
 
   @override
   Future<void> addNote(
@@ -36,15 +36,15 @@ class NoteLocalDataSourceImpl extends NoteLocalDataSource {
       content: content,
       image: image,
     );
-    await _notesBox.put(id, note);
+    await notesBox.put(id, note);
   }
 
   @override
-  Future<void> deleteNote(int id) async => await _notesBox.delete(id);
+  Future<void> deleteNote(int id) async => await notesBox.delete(id);
 
   @override
   Future<List<NoteEntity>> getAllNotes() async {
-    final notes = _notesBox.values.toList();
+    final notes = notesBox.values.toList();
     return notes.map((model) => model.toEntity()).toList();
   }
 
@@ -55,7 +55,7 @@ class NoteLocalDataSourceImpl extends NoteLocalDataSource {
     String? content,
     String? image,
   ) async {
-    final note = _notesBox.get(id);
+    final note = notesBox.get(id);
     if (note != null) {
       final updatedNote = NoteModel(
         id: note.id,
@@ -63,7 +63,7 @@ class NoteLocalDataSourceImpl extends NoteLocalDataSource {
         content: content ?? note.content,
         image: image ?? note.image,
       );
-      await _notesBox.put(id, updatedNote);
+      await notesBox.put(id, updatedNote);
     }
   }
 }

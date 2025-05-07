@@ -42,10 +42,14 @@ class _NoteFormState extends State<NoteForm> {
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController(text: widget.initialTitle);
-    _contentController = TextEditingController(text: widget.initialContent);
+    _titleController = TextEditingController(text: widget.initialTitle ?? '');
+    _contentController = TextEditingController(
+      text: widget.initialContent ?? '',
+    );
     _imagePath = widget.initialImagePath;
-    _image = File(_imagePath!);
+    if (_imagePath != null) {
+      _image = File(_imagePath!);
+    }
   }
 
   @override

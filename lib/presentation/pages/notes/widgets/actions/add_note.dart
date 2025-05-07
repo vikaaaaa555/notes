@@ -14,7 +14,6 @@ class AddNote extends StatelessWidget {
         context.read<NotesBloc>().add(
           AddNoteEvent(title: title, content: content, image: imagePath),
         );
-        Navigator.pop(context);
       },
     );
   }

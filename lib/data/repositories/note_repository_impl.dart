@@ -9,16 +9,11 @@ class NoteRepositoryImpl extends NoteRepository {
   const NoteRepositoryImpl({required this.localDataSource});
 
   @override
-  Future<void> addNote(
-    int id,
-    String title,
-    String content,
-    String image,
-  ) async => await localDataSource.addNote(id, title, content, image);
+  Future<void> addNote(String title, String content, String image) async =>
+      await localDataSource.addNote(title, content, image);
 
   @override
-  Future<void> deleteNote(int id) async =>
-      await localDataSource.deleteNote(id);
+  Future<void> deleteNote(int id) async => await localDataSource.deleteNote(id);
 
   @override
   Future<List<NoteEntity>> getAllNotes() async =>

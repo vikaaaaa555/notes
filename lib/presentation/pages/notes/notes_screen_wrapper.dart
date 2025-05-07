@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../bloc/note_bloc.dart';
+import '../../bloc/notes_bloc.dart';
 import 'notes_screen.dart';
 
 class NotesScreenWrapper extends StatelessWidget {
@@ -9,20 +9,20 @@ class NotesScreenWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NoteBloc, NoteState>(
+    return BlocConsumer<NotesBloc, NotesState>(
       listener: (context, state) {
 
       },
       builder: (context, state) {
         switch (state) {
-          case NoteInitial():
-            context.read<NoteBloc>().add(LoadNotesFromStorageEvent());
+          case NotesInitial():
+            context.read<NotesBloc>().add(LoadNotesFromStorageEvent());
             return const Center(child: CircularProgressIndicator());
-          case NoteLoading():
+          case NotesLoading():
             return const Center(child: CircularProgressIndicator());
-          case NoteSuccess():
+          case NotesLoadSuccess():
             return NotesScreen(notes: state.notes);
-          case NoteError():
+          case NotesError():
             return const Center(child: Text('Error is bloc'));
         }
       },

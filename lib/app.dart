@@ -1,4 +1,4 @@
-import 'package:dog_journal/presentation/bloc/note_bloc.dart';
+import 'package:dog_journal/presentation/bloc/notes_bloc.dart';
 import 'package:dog_journal/presentation/pages/notes/notes_screen_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NoteBloc>(
+    return BlocProvider<NotesBloc>(
       create:
-          (context) => NoteBloc(
+          (context) => NotesBloc(
             addNoteUseCase: sl<AddNoteUseCase>(),
             deleteNoteUseCase: sl<DeleteNoteUseCase>(),
             getAllNotesUseCase: sl<GetAllNotesUseCase>(),

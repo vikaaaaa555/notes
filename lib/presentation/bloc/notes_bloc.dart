@@ -7,21 +7,22 @@ import '../../domain/use_cases/delete_note_use_case.dart';
 import '../../domain/use_cases/get_all_notes_use_case.dart';
 import '../../domain/use_cases/update_note_use_case.dart';
 
-part 'note_event.dart';
-part 'note_state.dart';
+part 'notes_event.dart';
 
-class NoteBloc extends Bloc<NoteEvent, NoteState> {
+part 'notes_state.dart';
+
+class NotesBloc extends Bloc<NotesEvent, NotesState> {
   final AddNoteUseCase addNoteUseCase;
   final DeleteNoteUseCase deleteNoteUseCase;
   final GetAllNotesUseCase getAllNotesUseCase;
   final UpdateNoteUseCase updateNoteUseCase;
 
-  NoteBloc({
+  NotesBloc({
     required this.addNoteUseCase,
     required this.deleteNoteUseCase,
     required this.getAllNotesUseCase,
     required this.updateNoteUseCase,
-  }) : super(const NoteInitial()) {
+  }) : super(const NotesInitial()) {
     on<LoadNotesFromStorageEvent>(_handleLoadNotesFromStorageEvent);
     on<AddNoteEvent>(_handleAddNoteEvent);
     on<DeleteNoteEvent>(_handleDeleteNoteEvent);
@@ -30,22 +31,22 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
 
   Future<void> _handleLoadNotesFromStorageEvent(
     LoadNotesFromStorageEvent event,
-    Emitter<NoteState> emit,
+    Emitter<NotesState> emit,
   ) async {
-    emit(const NoteLoading());
+    emit(const NotesLoading());
     try {
       final notes = await getAllNotesUseCase();
-      emit(NoteSuccess(notes: notes));
+      emit(NotesLoadSuccess(notes: notes));
     } catch (e) {
-      emit(const NoteError(message: 'Can\'t load notes from storage'));
+      emit(const NotesError(message: 'Can\'t load notes from storage'));
     }
   }
 
   Future<void> _handleAddNoteEvent(
     AddNoteEvent event,
-    Emitter<NoteState> emit,
+    Emitter<NotesState> emit,
   ) async {
-    emit(const NoteLoading());
+    emit(const NotesLoading());
     try {
       await addNoteUseCase(
         AddNoteParams(
@@ -54,28 +55,30 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
           image: event.image,
         ),
       );
+      add(LoadNotesFromStorageEvent());
     } catch (e) {
-      emit(const NoteError(message: 'Failed to add a note'));
+      emit(const NotesError(message: 'Failed to add a note'));
     }
   }
 
   Future<void> _handleDeleteNoteEvent(
     DeleteNoteEvent event,
-    Emitter<NoteState> emit,
+    Emitter<NotesState> emit,
   ) async {
-    emit(const NoteLoading());
+    emit(const NotesLoading());
     try {
       await deleteNoteUseCase(DeleteNoteParams(id: event.id));
+      add(LoadNotesFromStorageEvent());
     } catch (e) {
-      emit(const NoteError(message: 'Failed to delete a note'));
+      emit(const NotesError(message: 'Failed to delete a note'));
     }
   }
 
   Future<void> _handleUpdateNoteEvent(
     UpdateNoteEvent event,
-    Emitter<NoteState> emit,
+    Emitter<NotesState> emit,
   ) async {
-    emit(const NoteLoading());
+    emit(const NotesLoading());
     try {
       await updateNoteUseCase(
         UpdateNoteParams(
@@ -85,8 +88,9 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
           image: event.image,
         ),
       );
+      add(LoadNotesFromStorageEvent());
     } catch (e) {
-      emit(const NoteError(message: 'Failed to update a note'));
+      emit(const NotesError(message: 'Failed to update a note'));
     }
   }
 }

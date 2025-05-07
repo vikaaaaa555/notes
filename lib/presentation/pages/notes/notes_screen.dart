@@ -20,7 +20,7 @@ class _NotesScreenState extends State<NotesScreen> {
       appBar: AppBar(
         title: Text('Notes'),
         centerTitle: true,
-        scrolledUnderElevation: 0,
+        scrolledUnderElevation: 0.0,
       ),
       body:
           widget.notes.isNotEmpty
@@ -36,7 +36,11 @@ class _NotesScreenState extends State<NotesScreen> {
                   itemCount: widget.notes.length,
                   itemBuilder: (context, index) {
                     final note = widget.notes[index];
-                    return NoteCard(title: note!.title, content: note.content);
+                    return NoteCard(
+                      title: note!.title,
+                      content: note.content,
+                      image: note.image,
+                    );
                   },
                 ),
               )

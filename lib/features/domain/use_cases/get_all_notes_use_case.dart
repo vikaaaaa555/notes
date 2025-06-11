@@ -1,4 +1,4 @@
-import '../../core/use_case.dart';
+import '../../../core/use_case.dart';
 import '../entities/note_entity.dart';
 import '../repositories/note_repository.dart';
 

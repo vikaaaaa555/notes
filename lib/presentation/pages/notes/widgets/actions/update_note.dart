@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../domain/entities/note_entity.dart';
+import '../../../../../features/domain/entities/note_entity.dart';
 import '../../../../bloc/notes_bloc.dart';
 import '../note_form.dart';
 

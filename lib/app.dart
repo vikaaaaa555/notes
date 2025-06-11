@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/common/service/app_dependencies.dart';
-import 'domain/use_cases/add_note_use_case.dart';
-import 'domain/use_cases/delete_note_use_case.dart';
-import 'domain/use_cases/get_all_notes_use_case.dart';
-import 'domain/use_cases/update_note_use_case.dart';
+import 'features/domain/use_cases/add_note_use_case.dart';
+import 'features/domain/use_cases/delete_note_use_case.dart';
+import 'features/domain/use_cases/get_all_notes_use_case.dart';
+import 'features/domain/use_cases/update_note_use_case.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

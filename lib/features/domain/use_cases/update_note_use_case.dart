@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../core/use_case.dart';
+import '../../../core/use_case.dart';
 import '../repositories/note_repository.dart';
 
 class UpdateNoteUseCase extends UseCaseWithParams<void, UpdateNoteParams> {

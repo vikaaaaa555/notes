@@ -1,14 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/note_entity.dart';
-import '../../domain/use_cases/add_note_use_case.dart';
-import '../../domain/use_cases/delete_note_use_case.dart';
-import '../../domain/use_cases/get_all_notes_use_case.dart';
-import '../../domain/use_cases/update_note_use_case.dart';
+import '../../features/domain/entities/note_entity.dart';
+import '../../features/domain/use_cases/add_note_use_case.dart';
+import '../../features/domain/use_cases/delete_note_use_case.dart';
+import '../../features/domain/use_cases/get_all_notes_use_case.dart';
+import '../../features/domain/use_cases/update_note_use_case.dart';
 
 part 'notes_event.dart';
-
 part 'notes_state.dart';
 
 class NotesBloc extends Bloc<NotesEvent, NotesState> {

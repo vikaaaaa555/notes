@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 
 import 'app.dart';
 import 'core/common/service/app_dependencies.dart';
-import 'data/models/note_model.dart';
+import 'features/data/models/note_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

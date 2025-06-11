@@ -4,7 +4,7 @@ import 'package:dog_journal/presentation/pages/notes/widgets/note_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/entities/note_entity.dart';
+import '../../../features/domain/entities/note_entity.dart';
 import '../../bloc/notes_bloc.dart';
 
 class NotesScreen extends StatefulWidget {

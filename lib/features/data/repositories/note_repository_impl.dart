@@ -1,5 +1,4 @@
-import 'package:dog_journal/domain/entities/note_entity.dart';
-
+import '../../domain/entities/note_entity.dart';
 import '../../domain/repositories/note_repository.dart';
 import '../data_sources/note_local_data_source.dart';
 

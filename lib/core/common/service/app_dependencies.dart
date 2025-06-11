@@ -1,14 +1,14 @@
-import 'package:dog_journal/data/repositories/note_repository_impl.dart';
-import 'package:dog_journal/domain/repositories/note_repository.dart';
-import 'package:dog_journal/domain/use_cases/add_note_use_case.dart';
-import 'package:dog_journal/domain/use_cases/delete_note_use_case.dart';
-import 'package:dog_journal/domain/use_cases/get_all_notes_use_case.dart';
-import 'package:dog_journal/domain/use_cases/update_note_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 
-import '../../../data/data_sources/note_local_data_source.dart';
-import '../../../data/models/note_model.dart';
+import '../../../features/data/data_sources/note_local_data_source.dart';
+import '../../../features/data/models/note_model.dart';
+import '../../../features/data/repositories/note_repository_impl.dart';
+import '../../../features/domain/repositories/note_repository.dart';
+import '../../../features/domain/use_cases/add_note_use_case.dart';
+import '../../../features/domain/use_cases/delete_note_use_case.dart';
+import '../../../features/domain/use_cases/get_all_notes_use_case.dart';
+import '../../../features/domain/use_cases/update_note_use_case.dart';
 
 final sl = GetIt.instance;
 
